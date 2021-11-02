@@ -221,44 +221,4 @@ class Core extends CI_Controller
         return $data;
     }
 
-    public function verifyUserApvs($email,$password){
-        $data = array(
-            'loginUser'=>$email,
-            'passUser'=>$password,
-            'apiKey'=>"aa3a8b4174c615070459e22260f848df248b407e",
-            'empLogin'=>"APVS",
-        );
-
-        $url = "https://api.apvs.org.br/v2/associadoi4pro/login/";
-
-        $ch  = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, TRUE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjMyNTAzNTkwMDAwLCJ1aWQiOiIyMDE5MTIxMjE4NTkwOSIsImVtYWlsIjoiZWR1YXJkb0B3aHlkaWdpdGFsLmNvbS5iciJ9.ylSdTxIFjepMBWvWZmzfjT9QoTJmWQtWi5Xxa/YnGsU=',
-        ));
-        $response = json_decode(curl_exec($ch), true);
-
-        curl_close($ch);
-
-        if(!empty($response)){
-            if($response['statusText']=="error"){
-                if(!empty($response['statusMensage'])){
-                    // $this->CI->api->response(401, array('status' => false, 'message'=>$response['statusMensage']));
-                }else{
-                    // $this->CI->api->response(401, array('status' => false, 'message'=>"Dados Incorretos!"));
-                }
-            }else{
-                $response['password'] = $password;
-                return $response;
-            }
-        }else{
-            // $this->CI->api->response(500, array('status' => false, 'message'=>"Erro! Dados incorretos!"));
-        }
-    }
 }
