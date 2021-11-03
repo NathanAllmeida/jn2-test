@@ -1,70 +1,140 @@
-###################
-What is CodeIgniter
-###################
+#  API - JN2 Teste
+## _API de Sistema de controle de clientes_
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+Este projeto é um desafio técnico
+Feito com
+- Codeigniter 3
+- MY_MODEL 3
+- PHP 7.3
+- Mysql 5.7
+- JWT
+- E bastante café
 
-*******************
-Release Information
-*******************
+## Recursos
+- Autenticação
+- Cadastro de Clientes
+- Edição de clientes
+- Listagem de cliente
+- Deletar cliente
+- Consultar todos os clientes com um final especifico na placa
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+## Instalação
+Para começar digite no terminal
+```sh
+docker up --build
+```
+Dentro da pasta database encontra se a estrutura do banco de dados junto com os dados
+```sh
+/database/database.sql
+```
+Caso aja necessidade de alterar o banco de dados ou usuário, as configurações se encontram em:
+```sh
+/app/application/config/database.php
+```
+Após rodar o docker, acesse:
+```sh
+http://localhost:8100
+```
 
-**************************
-Changelog and New Features
-**************************
+## Referência da API
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+Todos os metódos da API requerem 2 autenticação no header
+X-API-KEY e Authorization Bearer
+O primeiro foi enviado junto com o email
+O segundo é um token que é retornado no metodo abaixo
+```sh
+[POST] http://localhost:8100/usuarios/autenticacao
+```
 
-*******************
-Server Requirements
-*******************
+## Autenticação
+Método: **GET**
+URL: **http://localhost:8100/usuarios/autenticacao**
+Cabeçalho da Requisição:
+```sh
+    X-API-KEY: #############
+```
+Corpo da Requisição:
+```sh
+none
+```
 
-PHP version 5.6 or newer is recommended.
+## Cadastro de novo cliente
+Método: **POST**
+URL: **http://localhost:8100/clientes**
+Cabeçalho da Requisição:
+```sh
+    X-API-KEY: #############
+    Authorization: Bearer #############
+    Content-Type: application/json
+    Accept: application/json
+```
+Corpo da Requisição:
+```sh
+{
+    "name":"Barry Allen",
+    "phone":"(31) 90000-0003",
+    "cpf":"058.893.730-48",
+    "license_plate":"AAA-0003"
+}
+```
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+## Edição de um cliente já existente
+Método: **PUT**
+URL: **http://localhost:8100/clientes/:id**
+Cabeçalho da Requisição:
+```sh
+    X-API-KEY: #############
+    Authorization: Bearer #############
+    Content-Type: application/json
+    Accept: application/json
+```
+Corpo da Requisição:
+```sh
+{
+    "name":"Clark Kent da Silva",
+    "phone":"(31) 90000-0001",
+    "cpf":"515.313.040-10",
+    "license_plate":"AAA-0002"
+}
+```
 
-************
-Installation
-************
+## Consulta de dados de um cliente
+Método: **GET**
+URL: **http://localhost:8100/clientes/:id**
+Cabeçalho da Requisição:
+```sh
+    X-API-KEY: #############
+    Authorization: Bearer #############
 
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+```
+Corpo da Requisição:
+```sh
+none
+```
 
-*******
-License
-*******
+## Remoção de um cliente existente
+Método: **DELETE**
+URL: **http://localhost:8100/clientes/:id**
+Cabeçalho da Requisição:
+```sh
+    X-API-KEY: #############
+    Authorization: Bearer #############
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+```
+Corpo da Requisição:
+```sh
+none
+```
 
-*********
-Resources
-*********
-
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
-
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+## Consulta de todos os clientes cadastrados na base, onde o último número da placa do carro é igual ao informado
+Método: **GET**
+URL: **http://localhost:8100/consulta/final-placa/:number**
+Cabeçalho da Requisição:
+```sh
+    X-API-KEY: #############
+    Authorization: Bearer #############
+```
+Corpo da Requisição:
+```sh
+none
+```

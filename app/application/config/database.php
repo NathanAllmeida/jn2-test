@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '',
-	'username' => '',
-	'password' => '',
-	'database' => 'jn2-test',
+	'hostname' => 'jn2-test-db-1',
+	'username' => 'root',
+	'password' => 'jn2t3st',
+	'database' => 'jn2test',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
