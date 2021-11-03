@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'jn2-test-db-1',
-	'username' => 'root',
-	'password' => 'jn2t3st',
-	'database' => 'jn2test',
+	'hostname' => 'us-cdbr-east-04.cleardb.com',
+	'username' => 'b397ef04a22063',
+	'password' => 'eeb3f047',
+	'database' => 'heroku_179518b2df90c53',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -94,3 +94,5 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+// mysql://b397ef04a22063:eeb3f047@us-cdbr-east-04.cleardb.com/heroku_179518b2df90c53?reconnect=true
