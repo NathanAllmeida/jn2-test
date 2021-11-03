@@ -28,6 +28,8 @@ class Clients extends CI_Controller
 
     public function getByEndLicensePlate($endLicensePlate){
         $this->api->allowedMethods(['GET']);
+        $this->api->validateApiKey();
+        $this->api->validateBearerToken();
 
         $page = empty($this->input->get('page'))?1:$this->input->get('page');
         $rows = 10;
@@ -44,6 +46,9 @@ class Clients extends CI_Controller
     }
 
     public function new(){
+        $this->api->validateApiKey();
+        $this->api->validateBearerToken();
+
         $data = json_decode(file_get_contents("php://input"), true);
         if(!empty($data)){
             if(!empty($data['name'])&&!empty($data['phone'])&&!empty($data['cpf'])&&!empty($data['license_plate'])){
@@ -81,6 +86,9 @@ class Clients extends CI_Controller
     }
 
     public function edit($clientId){
+        $this->api->validateApiKey();
+        $this->api->validateBearerToken();
+
         $data = json_decode(file_get_contents("php://input"), true);
         if(!empty($clientId)){
             if(!empty($data)){
@@ -122,6 +130,9 @@ class Clients extends CI_Controller
     }
 
     public function delete($clientId){
+        $this->api->validateApiKey();
+        $this->api->validateBearerToken();
+
         if(!empty($clientId)){
             $check = $this->clients_model->where(['status'=>1])->get($clientId);
             if(!empty($check)){
